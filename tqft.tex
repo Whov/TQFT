@@ -1,0 +1,112 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[a4paper, left=3cm, bottom=4cm, right=3cm]{geometry}
+
+\usepackage{beppe_package_eng} 
+\usepackage{simplewick}
+\usepackage{simpler-wick}
+
+\renewcommand{\S}{\mathcal{S}}
+
+\date{\today}
+\author{Giuseppe Bogna, Bruno Bucciotti, Paolo Tognini}
+\title{Quantum Fields and Topology}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\clearpage
+	
+	
+	%%PARTE DI PAOLO
+	\section{Introduzione}
+	
+	\[Z[\sigma] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0}\]
+	\[\left. \frac{1}{Z[0]}{\frac{-i\delta}{\delta J(x_1)}\frac{-i\delta}{\delta J(x_2)}\dots \frac{-i\delta}{\delta J(x_n)}}Z[J] \right|_{J=0} = <\phi(x_1)\phi(x_2)\dots \phi(x_n)>\]
+	La teoria libera è $S_I[\phi]=0$.\\
+	\[S_0 = \int \d^4 x (\frac{1}{2}\d_\alpha \phi \d^\alpha \phi - \frac{m^2}{2}\phi^2)\]
+	\[Z_0[J]=\bra{0}Te^{i\int \d^4 x j(x)\phi(x)}\ket{0}\]
+	\[\bra{0}T\sum_{n=0}^{+\infty} \frac{i^n}{n!}\int \d^4x_1 \dots \d^4 x_n J(x_1)\dots J(x_n) \phi(x_1)\dots \phi(x_n)\ket{0}\]
+	se $n$ è dispari ($n=2p+1$) il valore di aspettazione di quei campi è nullo:
+	\[\bra{0}T\phi(x_1)\dots \phi(x_{2p+1})\ket{0}\]
+	Se $n$ è pari($n=2p$) abbiamo:
+	\[\bra{0}T(\phi(x_1)\dots\phi(x_2p)\ket{0} = \sum_{j=2}^{2p}\wick{\c\phi(x_i) \c\phi(x_j)} \dots \bra{0}T\hat {\phi(x_1)} \phi(x_2) \dots \hat{\phi(x_j)}\dots \phi(x_{2p})\]
+	dove $\hat \phi(x_j)$ indica che $\phi(x_j)$ non c'è.\\
+	Notiamo che la cosa può essere fatta $(2p-1)$ volte. Ricorsivamente abbiamo
+	\[(2p-1)!! \wick{\c \phi_1 \c \phi_2} \wick{\c \phi_3 \c \phi_4} \dots \wick{\c \phi_{2p-1} \c \phi_{2p}}\]
+	Calcoliamo ora:
+	\[\sum_{p=0}^{+\infty} \frac{i^{2p}(2p-1)!}{(2p)!} \int \d^4x_1 \dots \d^4 x_{2p} J(x_1)\dots J(x_{2p} i\Delta(x_1-x_2) i\Delta(x_3-x_4) \dots i\Delta(x_{2p-1}-x_{2p})\]
+	\[= \sum_{p=0}^{+\infty} \frac{(-i)^p}{p!2^p} \left( \int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)\right)^p\]
+	da cui ovviamente segue
+	\[Z_0[J] = e^{-\frac{i}{2}\int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)} \]
+	Proviamo a calcolare
+	\[\bra{0}Te^{i\int J\phi}\ket{0} = 1 + \frac{i^2}{2} \int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)\]
+	Ricordiamo che
+	\[\mathrm{Sum\,of\,all\,Feynman\,diagrams}=e^\mathrm{Sum\,of\,all\,connected\,Feynman\,diagrams}\]
+	Ricordiamo
+	\[ \frac{1}{Z[0]}\frac{-i\delta}{\delta J(x_1)}\frac{-i\delta}{\delta J(x_2)}\dots \frac{-i\delta}{\delta J(x_n)} Z_0[J] = <\phi(x_1)\phi(x_2)\dots \phi(x_n)> \]
+	Dopo aver cancellato e riscritto tante volte cose sullo stesso angolo di lavagna (mentre io imparavo a fare le contrazioni di Wick usando LaTeX), conclude con la scritta:
+	\[<F(\phi)>_0 = F(-i\frac{\delta}{\delta J})Z_0[J]\]
+	Rimarcando che è vero anche per teorie interagenti ($\mathcal{L}_I \neq 0$).\\
+	\\
+	Ricordiamo
+	\[Z[\sigma] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0}\]
+	Scriviamo
+	\[= <e^{iS_I[\phi]}>_0\]
+	Diciamo inoltre
+	\[Z_0[J] = \bra{0}T(e^{i\int{\phi(x)J(x)}}\ket{0} = (-i\frac{\delta}{\delta J(x_1)}) \dots (-i\frac{\delta}{\delta J(x_n)}) Z_0[J] = \bra{0}T(e^{i\int \d^4 x J(x)\phi(x)} \phi_1 \phi_2 \dots \phi_n)\ket{0}\]
+	Vediamo chiaramente che è ammessa un'espansione formale in potenza
+	\[F(-i\frac{\delta}{\delta J})Z_0[J] = \bra{0}T(e^{i\int J\phi} F(\phi))\ket{0}\]
+	\\
+	\noindent Proviamo con
+	\[\mathcal{L}_I = -\frac{g}{4!} \phi^4\]
+	fa un po' di conti ma li cancella subito. Ma sai bene che cosa esce, quindi è inutile perderci tempo. Torniamo alle cose generali.\\
+	Abbiamo:
+	\[Z[J] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0} = e^{iS_I[-i\frac{\delta}{\delta J}]} Z_0[J] = e^{iS_I[-i\frac{\delta}{\delta J}]} e^{-\frac{i}{2}J\Delta J}\]
+	È vera inoltre
+	\[U[\Phi]=\bra{0}Te^{i S_I [\phi+\Phi]}\ket{0} = \left. e^{iS_I[\Phi - i\frac{\delta}{\delta J}]Z_0[J]} \right|_{J=0}\]
+	\[U[\Phi]= \left. e^{iS_I[\Phi-i\frac{\delta}{\delta J}]} e^{-\frac{i}{2}\int J\Delta J} \right|_{J=0}\]
+	A questo punto invoca una arcana formula che ha appreso da Coleman. Sembra di essere in un corso di magia!\\
+	Proposizione: Se $F(x_j)$ e $G(x_k)$, $x = x_i = \{x_1,x_2,\dots x_n\}$ allora
+	\[\left. F(-i\frac{\d}{\d x_j})G(x_k) = G(-i\frac{\d}{\d y_k}) F(y_j) e^{ix\cdot y} \right|_{y=0}\]
+	Dove $x\cdot y = x_1 y_1 + x_2 y_2 + \dots x_n y_n$, e chiaramente a destra la derivata agisce anche sull'esponenziale!\\
+	Coleman dice, astutamente: vediamo se è vera per onde piane:
+	\[F(x_j)=e^{ib_j x_j}\]
+	\[G(x_j)=e^{ic_k x_k}\]
+	È vera per onde piane. Ma tutto è fatto da onde piane! Fourier a me! E così, è fatta.\\
+	Vediamo meglio:
+	\[F(-i\frac{\delta}{\delta x_j})G(x_k) = e^{ib_j (-i\frac{\d}{\d x_J})} e^{ic_k x_k} = e^{b_j \frac{\d}{\d x^j}} e^{ic_k x_k} = e^{ic_k (x_k + b_k)}\]
+	Se fate il conto anche sul lato destro, torna. È un conto banale. Mi rifiuto di farlo.\\
+	\\
+	\noindent Ritorniamo a noi. Perché ho invocato il potere degli antichi? Perché ho
+	\[Z[J] = e^{iS_I[-i\frac{\d}{\d J}]}e^{-\frac{i}{2}\int J\Delta J}\]
+	E voglio scambiare il coso con la derivata con il resto. Applicando l'antico incantesimo, trovo:
+	\[Z[J] = \left. e^{-\frac{i}{2} \int \d^4x \d^4y (-i\frac{\delta}{\delta K(x)}) \Delta(x-y) (-i\frac{\delta}{\delta K(y)})} e^{iS_I[K(x)]}e^{i\int \d^4x K(x)J(x)}\right|_{y=0}\]
+	Cerchiamo di sistemare il primo pezzo con la nota identità:
+	\[e^{\frac{i}{2}\int \d^4x \d^4y \frac{\delta}{\delta K(x)} \Delta(x-y) \frac{\delta}{\delta K(y)}} e^{i\int \d^4 K(w)J(w)} = e^{i\int \d^4w J(w)K(w)} e^{-\frac{i}{2}\int \d^4x \d^4y J(x)\Delta(x-y)J(y)} e^{\frac{i}{2}\int \d^4x \d^4y \frac{\delta}{\delta K(x)} \Delta(x-y) \frac{\delta}{\delta K(y)}} e^{-\int \d^4x \d^4y \frac{\delta}{\delta K(x)} \Delta(x-y) J(y)}\]
+	In notazione più compatta:
+	\[e^{\frac{i}{2} \delta_K \Delta \delta_K} e^{iK \cdot J} = e^{iJ \cdot K}e^{-\frac{i}{2}J\Delta J}e^{\frac{i}{2}\delta_K \Delta \delta_K} e^{-\delta_K \Delta J}\]
+	Ricordiamo che in MQ
+	\[e^{p\Delta p}e^{iqb} = e^{iqb} (e^{-iqb}e^{p\Delta p}e^{iqb}) = e^{iqb} e^{(p-ib)\Delta(p+ib)} \]
+	E si vede che è proprio la stessa cosa! (si vede, si vede...).
+	\[Z[J]= e^{-\frac{i}{2}\int \d^4 x \d^4 y J(x) \Delta(x-y) J(y)} = \left. e^{\frac{i}{2}\int \d^4 x \d^4 y \frac{\delta}{\delta K(x)} \Delta(x-y) \frac{\delta}{\delta K(y)}}e^{iS_I[K-\Delta J]} \right|_{K=0}\]
+	dove ricordiamo che $J-\Delta J$ è uguale a
+	\[J(x) - \int \Delta(x-y)J(y)\]
+	Questa notazione è così ovvia che non serve parlarne.
+	Ricordiamo piuttosto che con
+	\[U(\Phi) = e^{\frac{i}{2}\int \d^4x \d^4y \frac{\delta}{\delta \Phi(x)}\Delta(x-y)\frac{\delta}{\delta \Phi(y)}} e^{iS_I[\Phi]}\]
+	posso compattare ancora di più la formula precedente, ottenendo:
+	\[Z[J] = Z_0[J] U[-\Delta J]\]
+	Ricordiamo inoltre:\\
+	QFT a livello perturbative = Contrazione di Wick con diagrammi di Feynman + Rinormalizzazione che fissa tutte le ambiguità\\
+	(MI SEMBRA TENDENZIALMENTE FALSO...).\\
+	
+	
+	
+	\noindent Don't worry be happy!\\
+	\[a^\dagger \ket{:(} = \ket{:)}\]
+	
+	%%FINE PARTE DI PAOLO
+	
+	\newpage
+	\bibliography{bibliografia}
+\end{document}
