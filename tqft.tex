@@ -6,6 +6,7 @@
 \usepackage{simpler-wick}
 
 \renewcommand{\S}{\mathcal{S}}
+\bibliographystyle{alpha}
 
 \date{\today}
 \author{Giuseppe Bogna, Bruno Bucciotti, Paolo Tognini}
@@ -16,50 +17,118 @@
 	\tableofcontents
 	\clearpage
 	
-	
 	%%PARTE DI PAOLO
 	\section{Introduzione}
 	
-	\[Z[\sigma] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0}\]
-	\[\left. \frac{1}{Z[0]}{\frac{-i\delta}{\delta J(x_1)}\frac{-i\delta}{\delta J(x_2)}\dots \frac{-i\delta}{\delta J(x_n)}}Z[J] \right|_{J=0} = <\phi(x_1)\phi(x_2)\dots \phi(x_n)>\]
-	La teoria libera è $S_I[\phi]=0$.\\
-	\[S_0 = \int \d^4 x (\frac{1}{2}\d_\alpha \phi \d^\alpha \phi - \frac{m^2}{2}\phi^2)\]
-	\[Z_0[J]=\bra{0}Te^{i\int \d^4 x j(x)\phi(x)}\ket{0}\]
+	Partiamo con un breve ripasso di teorica 1. Molto del materiale della prima parte si può trovare nei primi capitoli di \cite{anselmi}, in cui vengono sviluppati parte dei metodi funzionali che tratteremo.
+	
+	\subsection{Interaction picture}
+	Separiamo la lagrangiana in parte libera $\mathcal{L}_0$ al più quadratica nei campi e parte di interazione $\mathcal{L}_{int}$. Analogamente $\mathcal{H} = \mathcal{H}_0+\mathcal{H}_{int}$. Assumiamo temporaneamente per semplicità che $\mathcal{L}_{int}$ non dipenda dalle derivate dei campi, così $\mathcal{L}_{int} = -\mathcal{H}_{int}$. $\mathcal{H}_0$ definisce una evoluzione libera; passando in rappresentazione di interazione si ha $\tilde{H}_I(t) = e^{iH_0t}H_{int}e^{-iH_0t}$ e $S_I = e^{iH_0t}S_{int}e^{-iH_0t}$.
+	
+	\subsection{Path integral}
+	
+	
+	\subsection{Funzione di partizione Z[j]}
+	In questa sezione definiamo la $Z[J]$ e la calcoliamo nel caso della teoria libera. Mostriamo poi che la $Z[J]$ genera tutte le funzioni di correlazione a n punti. Dimostriamo che $Z[J] = e^{iS_I[-i\frac{\delta}{\delta J}]} Z_0[J]$ e osserviamo infine il collegamento fra l'espansione della $Z[J]$ e i diagrammi di Feynman.
+	
+	
+	Definiamo Z[J] dove $J(x)$ è una funzione dello spaziotempo in $\R$ che assegnamo.
+	
+	\[ Z[J] = \bra{0}T\left[e^{iS_I[\hat{\phi}]}e^{i\int{\hat{\phi}(x)J(x)}\d^4x}\right]\ket{0} \]
+	\[ = \int \mathcal{D}\phi e^{iS[\phi] + i \int \phi J \d^4 x} \]
+	Notare che $Z[J]$ è il valore di aspettazione sul vuoto dell'operatore $e^{i\int{\hat{\phi}(x)J(x)}\d^4x}$. Il vuoto che compare nella formula è quello definito dalla teoria libera.
+	\\
+		
+	Facciamo un esempio	in cui la teoria è libera ($S_I=0$)
+	\[S_0 = \int \d^4 x (\frac{1}{2} \partial_\alpha \phi \partial^\alpha \phi - \frac{m^2}{2}\phi^2)\]
+	\[Z_0[J]=\bra{0}Te^{i\int \d^4 x J(x)\phi(x)}\ket{0} = \]
 	\[\bra{0}T\sum_{n=0}^{+\infty} \frac{i^n}{n!}\int \d^4x_1 \dots \d^4 x_n J(x_1)\dots J(x_n) \phi(x_1)\dots \phi(x_n)\ket{0}\]
-	se $n$ è dispari ($n=2p+1$) il valore di aspettazione di quei campi è nullo:
+	se $n$ è dispari ($n=2p+1$) il valore di aspettazione è nullo:
 	\[\bra{0}T\phi(x_1)\dots \phi(x_{2p+1})\ket{0}\]
 	Se $n$ è pari($n=2p$) abbiamo:
-	\[\bra{0}T(\phi(x_1)\dots\phi(x_2p)\ket{0} = \sum_{j=2}^{2p}\wick{\c\phi(x_i) \c\phi(x_j)} \dots \bra{0}T\hat {\phi(x_1)} \phi(x_2) \dots \hat{\phi(x_j)}\dots \phi(x_{2p})\]
-	dove $\hat \phi(x_j)$ indica che $\phi(x_j)$ non c'è.\\
-	Notiamo che la cosa può essere fatta $(2p-1)$ volte. Ricorsivamente abbiamo
-	\[(2p-1)!! \wick{\c \phi_1 \c \phi_2} \wick{\c \phi_3 \c \phi_4} \dots \wick{\c \phi_{2p-1} \c \phi_{2p}}\]
-	Calcoliamo ora:
-	\[\sum_{p=0}^{+\infty} \frac{i^{2p}(2p-1)!}{(2p)!} \int \d^4x_1 \dots \d^4 x_{2p} J(x_1)\dots J(x_{2p} i\Delta(x_1-x_2) i\Delta(x_3-x_4) \dots i\Delta(x_{2p-1}-x_{2p})\]
+	\[\bra{0}T(\phi(x_1)\dots\phi(x_{2p})\ket{0} = \sum_{j=2}^{2p}\wick{\c\phi(x_1) \c\phi(x_j)} \dots \bra{0}T\hat {\phi(x_1)} \phi(x_2) \dots \hat{\phi(x_j)}\dots \phi(x_{2p})\ket{0}\]
+	dove $\hat {\phi(x_j)}$ indica che $\phi(x_j)$ non c'è.\\
+	Notiamo che la cosa può essere fatta $p$ volte. Ricorsivamente abbiamo
+	\[ \sum_{p=0}^{+\infty} \frac{i^{2p}}{(2p)!}\int \d^4x_1 \dots \d^4 x_{2p} J(x_1)\dots J(x_{2p}) \left(\phi_1\dots\phi_{2p}\, \mathrm{contratti\, in\, tutti\, i\, modi\, possibili}\right)\]
+	Per simmetria del resto dell'integrando sotto permutazione delle variabili $x_i$ di integrazione, la somma su tutte le contrazioni dei $\phi$ si riduce a
+	\[ \sum_{p=0}^{+\infty} i^{2p}\frac{(2p-1)!!}{(2p)!}\int \d^4x_1 \dots \d^4 x_{2p} J(x_1)\dots J(x_{2p}) \wick{\c \phi_1 \c \phi_2} \dots \wick{\c \phi_{2p-1} \c \phi_{2p}} \]
+	ricordando che $\wick{\c \phi_1 \c \phi_2} = i \Delta(x_1-x_2)$
+	
 	\[= \sum_{p=0}^{+\infty} \frac{(-i)^p}{p!2^p} \left( \int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)\right)^p\]
-	da cui ovviamente segue
+	dove abbiamo usato che gli integrali si dividono in $p$ coppie tutte uguali, abbiamo raccolto le $i$ accanto ai $\Delta$ e abbiamo diviso i fattoriali: $\dfrac{(2p-1)!!}{(2p)!} = \dfrac{(2p-1)(2p-3)\dots}{(2p)(2p-1)\dots} = \dfrac{1}{2^p p!}$.
+
+	Segue che
 	\[Z_0[J] = e^{-\frac{i}{2}\int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)} \]
-	Proviamo a calcolare
-	\[\bra{0}Te^{i\int J\phi}\ket{0} = 1 + \frac{i^2}{2} \int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)\]
-	Ricordiamo che
-	\[\mathrm{Sum\,of\,all\,Feynman\,diagrams}=e^\mathrm{Sum\,of\,all\,connected\,Feynman\,diagrams}\]
-	Ricordiamo
-	\[ \frac{1}{Z[0]}\frac{-i\delta}{\delta J(x_1)}\frac{-i\delta}{\delta J(x_2)}\dots \frac{-i\delta}{\delta J(x_n)} Z_0[J] = <\phi(x_1)\phi(x_2)\dots \phi(x_n)> \]
-	Dopo aver cancellato e riscritto tante volte cose sullo stesso angolo di lavagna (mentre io imparavo a fare le contrazioni di Wick usando LaTeX), conclude con la scritta:
-	\[<F(\phi)>_0 = F(-i\frac{\delta}{\delta J})Z_0[J]\]
-	Rimarcando che è vero anche per teorie interagenti ($\mathcal{L}_I \neq 0$).\\
 	\\
-	Ricordiamo
-	\[Z[\sigma] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0}\]
-	Scriviamo
-	\[= <e^{iS_I[\phi]}>_0\]
-	Diciamo inoltre
-	\[Z_0[J] = \bra{0}T(e^{i\int{\phi(x)J(x)}}\ket{0} = (-i\frac{\delta}{\delta J(x_1)}) \dots (-i\frac{\delta}{\delta J(x_n)}) Z_0[J] = \bra{0}T(e^{i\int \d^4 x J(x)\phi(x)} \phi_1 \phi_2 \dots \phi_n)\ket{0}\]
-	Vediamo chiaramente che è ammessa un'espansione formale in potenza
-	\[F(-i\frac{\delta}{\delta J})Z_0[J] = \bra{0}T(e^{i\int J\phi} F(\phi))\ket{0}\]
-	\\
-	\noindent Proviamo con
-	\[\mathcal{L}_I = -\frac{g}{4!} \phi^4\]
-	fa un po' di conti ma li cancella subito. Ma sai bene che cosa esce, quindi è inutile perderci tempo. Torniamo alle cose generali.\\
+	
+	Trattiamo ora le funzioni di correlazione. Ricordando dall'appendice qualche nozione di derivazione funzionale si ha
+	%TODO fare appendice con derivate funzionali!
+	\[ \langle T\phi(x_1)\phi(x_2)\dots \phi(x_n)\rangle\ = \left. \frac{1}{Z[0]}{\frac{-i\delta}{\delta J(x_1)}\frac{-i\delta}{\delta J(x_2)}\dots \frac{-i\delta}{\delta J(x_n)}}Z[J] \right|_{J=0} \]
+	dove si è diviso per $Z[0]$ per normalizzare la transizione vuoto-vuoto (tale fattore di normalizzazione è infinito per la maggior parte delle teorie). La dimostrazione funziona sia per la definizione di $Z[J]$ data con il path integral sia con quella canonica, si noti infatti che il $T$ ordinamento porta i campi nella posizione corretta.
+
+	Se evitiamo di settare $J=0$ si ha più in generale che, essendo $F(\phi)$ un polinomio nei campi,
+	\[ \int \mathcal{D}\phi F(\phi) e^{iS}e^{i\int J\phi \d^4x} = F[-i\frac{\delta}{\delta J}] \int \mathcal{D}\phi e^{iS}e^{i\int J \phi \d^4x} \]
+	allora concludiamo come caso particolare che
+	\[ Z[J] = \int \mathcal{D}\phi e^{iS_0}e^{i\int J\phi \d^4x} e^{iS_I[\phi]} = \sum_{n=0}^{\infty} \frac{1}{n!} \int \mathcal{D}\phi e^{iS_0}e^{i\int J\phi \d^4x} (iS_I(\phi))^n \]
+	\[ = \sum_{n=0}^{\infty} \frac{1}{n!} \left(iS_I[-i\frac{\delta}{\delta J}]\right)^n \int \mathcal{D}\phi e^{iS_0}e^{i\int J\phi \d^4x} = 
+	e^{iS_I[-i\frac{\delta}{\delta J}]} Z_0[J] \]
+	cioè possiamo agire sulla $Z_0$ libera con un particolare operatore e ottenere la $Z[J]$ interagente.
+	
+	Accenniamo infine che espandendo $Z[J]$ si ottiene una serie in termini delle funzioni di correlazione. Facendo un esempio si ha che $\langle \phi(x_1) \phi(x_2)\rangle$ (il cosiddetto \emph{propagatore vestito}) è una serie di diagrammi dei quali il primo è il propagatore "nudo", i successivi sono correzioni ad esso. In generale $Z[J]$ è la somma di tutti i diagrammi di Feynman della teoria (anche disconnessi).
+	
+	\subsection{W[J]}
+	Definiamo
+	\[ Z[J] = e^{W{[J]}} \]
+	e mostriamo che, se $Z[J]$ era la somma di tutti i diagrammi di Feynman, $W[J]$ è la somma dei soli diagrammi connessi.
+	
+	Iniziamo dal caso libero. Qui $Z_0[J] = e^{-\frac{i}{2}\int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)}$, che espanso in serie è la serie in $n$ di tutti i diagrammi di Feynman della teoria. Poichè la teoria è libera non ci sono vertici interni e l'unica possibilità è raggruppare fra loro $n$ propagatori liberi. L'unico diagramma connesso è il termine dell'esponenziale con $n=1$, ovverosia l'esponente ($W_0[J]$).
+	Dunque nel caso libero $W_0[J]$ è la somma di tutti i diagrammi connessi della teoria.
+	
+	Da qui è possibile seguire la dimostrazione in \cite{anselmi} (pag.34). Noi procediamo in modo diverso. La $Z[J]$ è la somma di tutti i diagrammi, divisi per il fattore di simmetria del diagramma; inoltre, trascurando i fattori di simmetria, dato un diagramma disconnesso il suo contributo è il prodotto dei contributi dei diagrammi che lo compongono (cioè gli integrali si fattorizzano in quelli delle componenti connesse).
+	
+	Supponiamo di fare un elenco dei diagrammi connessi. Un diagramma generico $D$ è descritto univocamente dalla sequenza $\{n_i\}$ di numeri che contano quante volte compare il diagramma connesso $i$esimo. Il fattore di simmetria $S(D)$ di $D$ sarà il prodotto di due contributi: una parte viene dal fattore di simmetria di ciascuna componente connessa $i$, e tale fattore è elevato alla $n_i$; poi c'è un fattore $n_i!$ che viene dalla possibilità di permutare i diagrammi connessi.
+	\[ Z[J] = \sum \dfrac{D}{S(D)} = \sum_{\{n_i\}} \prod_i \left(\dfrac{d_i}{S(d_i)}\right)^{n_i}\frac{1}{n_i!} = \prod_i \sum_{n=0}^{\infty} \left( \dfrac{d_i}{S(d_i)} \right)^n \dfrac{1}{n!} = \prod_{i} e^{\dfrac{d_i}{S(d_i)}} = e^{\sum_i \dfrac{d_i}{S(d_i)}} \]
+	\[ Z[J] = e^{W[J]} \]
+	
+	\subsection{U[$\phi$]}
+	Dato $\Phi$ campo classico reale, definiamo
+	\[ U[\Phi] = \bra{0}T\left[e^{iS_I[\hat{\phi}+\Phi]}\right]\ket{0} \]%FORSE = \int \mathcal{D}\phi e^{iS[\phi+\Phi]} \]
+	Se poniamo che l'azione di $a$, $a^\dagger$ sia
+	\[ a_\vec{k} = \int\d^4x \dfrac{e^{ikx}}{\sqrt{2E_\vec{k}}} \dfrac{\delta}{\delta \Phi(x)},\qquad
+	a_\vec{k}^\dagger = \int\d^4x \dfrac{e^{-ikx}}{\sqrt{2E_\vec{k}}} \dfrac{\delta}{\delta \Phi(x)} \]
+	allora si trova UNA COSA FALSA!%TODO: fixare! Non stai inserendo phi e basta, ci sono potenze a caso.
+	
+	Consideriamo l'azione interagente nella teoria $S = \int \d^4x \frac{1}{2}(\partial_\mu\phi\partial^\mu\phi-m^2)-\frac{g}{4!}\phi^4$ e determiniamo i diagrammi se aggiungiamo il campo $\Phi$ esterno
+	\[ S_{int}[\phi+\Phi] = \int\d^4x -\frac{g}{4!} [\phi^4+4\phi^3\Phi+6\phi^2\Phi^2+4\phi\Phi^3+\Phi^4] \]
+	%TODO: fare i diagrammini
+	
+	La struttura dei diagrammi è universale, al di là della divergenza dei loro contributi. Notiamo che la differenza principale con $Z[J]$ è che le gambe esterne per $Z$ sono quantistiche (con sorgente $J(x)$ classica), mentre per $U$ le gambe esterne sono puramente classiche: se amputassimo le parti classiche, i diagrammi per $U$ sarebbero senza gambe esterne.
+	
+	\subsection{$\Gamma[\phi]$}
+	Iniziamo definendo
+	\[ \Phi[J](x) = \dfrac{\delta W[J]}{\delta J(x)} \]
+	Supponiamo di poter invertire questo funzionale (tipicamente questo è esplicitamente possibile solo in modo perturbativo) e definiamo $\hat{J}$ come il funzionale tale che
+	\[ J(x) = \hat{J}[\Phi](x) \]
+	
+	
+	\section{Rinormalizzazione}
+	Prendiamo come esempio la teoria $\phi^4$ 
+	\[ S = \int \d^4x \frac{1}{2}(\partial_\mu\phi\partial^\mu\phi-m^2)-\frac{g}{4!}\phi^4 \]
+	e studiamo il contributo del diagramma a un loop
+	%Diagramma
+	\[ \int\d^4x \d^4y \d^4z [i\Delta(x-y) iJ(y)][i\Delta(x-z)iJ(z)][i\Delta(x-x)] \]
+	Esplicitiamo le funzioni $\Delta$ chiamando $p,q$ l'impulso proveniente da $y,z$ e $k$ l'impulso nel loop.
+	\[ = i^5 \int \d^4x\d^4y\d^4z \frac{\d^4p}{(2\pi)^4}\frac{\d^4q}{(2\pi)^4}\frac{\d^4k}{(2\pi)^4} \frac{e^{-ip(x-y)}}{p^2-m^2+i\epsilon}\frac{e^{-iq(x-z)}}{q^2-m^2+i\epsilon}\frac{1}{k^2-m^2+i\epsilon} J(y)J(z) \]
+	L'integrale in $y,z$ è una trasformata di fourier, quello in $x$ dà una delta di $p+q$
+	\[ = i^5 \int \frac{\d^4p}{(2\pi)^4} \frac{|\tilde{J}(p)|^2}{(p^2-m^2+i\epsilon)}\int\frac{\d^4k}{(2\pi)^4}\frac{1}{k^2-m^2+i\epsilon} \]
+	Il primo termine non dà problemi, supponendo che $\tilde{J}$ decada a infinito, mentre il secondo contributo (proveniente unicamente dal loop) diverge come $\Lambda^2$ nel cutoff $\Lambda$.
+	%SE qualcuno mi controlla il conto qui sopra please, ma dovrebbe andare.
+	
+	In modo analogo si osserva che il diagramma associato a $i^2\Delta^2(x-y)$ diverge come $\ln(\Lambda)$.%TODO: fare diagramma
+	
+	Osserviamo che la divergenza nel valore dell'integrale si traduce nello spazio delle posizioni in una \emph{ambiguità} nella definizione del prodotto di due distribuzioni, cioè non è definito $\Delta(x-y)\Delta(x-y)$.
+	
+	
 	Abbiamo:
 	\[Z[J] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0} = e^{iS_I[-i\frac{\delta}{\delta J}]} Z_0[J] = e^{iS_I[-i\frac{\delta}{\delta J}]} e^{-\frac{i}{2}J\Delta J}\]
 	È vera inoltre
