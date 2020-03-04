@@ -12,8 +12,16 @@
 \author{Giuseppe Bogna, Bruno Bucciotti, Paolo Tognini}
 \title{Quantum Fields and Topology}
 
+
 \begin{document}
 	\maketitle
+	
+	\begin{abstract}
+		Don't worry be happy!\\
+		\[a^\dagger \ket{:(} = \ket{:)}\]
+		\href{https://www.youtube.com/watch?v=quYjN57Tycg}{Musica per conciliare lo studio.}
+	\end{abstract}
+
 	\tableofcontents
 	\clearpage
 	
@@ -78,8 +86,8 @@
 	
 	\subsection{W[J]}
 	Definiamo
-	\[ Z[J] = e^{W{[J]}} \]
-	e mostriamo che, se $Z[J]$ era la somma di tutti i diagrammi di Feynman, $W[J]$ è la somma dei soli diagrammi connessi.
+	\[ Z[J] = e^{iW{[J]}} \]
+	e mostriamo che, se $Z[J]$ era la somma di tutti i diagrammi di Feynman, $W[J]$ è la somma dei soli diagrammi connessi (a meno di fasi, che trascureremo in questa sottosezione).
 	
 	Iniziamo dal caso libero. Qui $Z_0[J] = e^{-\frac{i}{2}\int \d^4 x \d^4 y J(x)\Delta(x-y)J(y)}$, che espanso in serie è la serie in $n$ di tutti i diagrammi di Feynman della teoria. Poichè la teoria è libera non ci sono vertici interni e l'unica possibilità è raggruppare fra loro $n$ propagatori liberi. L'unico diagramma connesso è il termine dell'esponenziale con $n=1$, ovverosia l'esponente ($W_0[J]$).
 	Dunque nel caso libero $W_0[J]$ è la somma di tutti i diagrammi connessi della teoria.
@@ -88,7 +96,7 @@
 	
 	Supponiamo di fare un elenco dei diagrammi connessi. Un diagramma generico $D$ è descritto univocamente dalla sequenza $\{n_i\}$ di numeri che contano quante volte compare il diagramma connesso $i$esimo. Il fattore di simmetria $S(D)$ di $D$ sarà il prodotto di due contributi: una parte viene dal fattore di simmetria di ciascuna componente connessa $i$, e tale fattore è elevato alla $n_i$; poi c'è un fattore $n_i!$ che viene dalla possibilità di permutare i diagrammi connessi.
 	\[ Z[J] = \sum \dfrac{D}{S(D)} = \sum_{\{n_i\}} \prod_i \left(\dfrac{d_i}{S(d_i)}\right)^{n_i}\frac{1}{n_i!} = \prod_i \sum_{n=0}^{\infty} \left( \dfrac{d_i}{S(d_i)} \right)^n \dfrac{1}{n!} = \prod_{i} e^{\dfrac{d_i}{S(d_i)}} = e^{\sum_i \dfrac{d_i}{S(d_i)}} \]
-	\[ Z[J] = e^{W[J]} \]
+	\[ Z[J] = e^{iW[J]} \]
 	
 	\subsection{U[$\phi$]}
 	Dato $\Phi$ campo classico reale, definiamo
@@ -105,10 +113,31 @@
 	La struttura dei diagrammi è universale, al di là della divergenza dei loro contributi. Notiamo che la differenza principale con $Z[J]$ è che le gambe esterne per $Z$ sono quantistiche (con sorgente $J(x)$ classica), mentre per $U$ le gambe esterne sono puramente classiche: se amputassimo le parti classiche, i diagrammi per $U$ sarebbero senza gambe esterne.
 	
 	\subsection{$\Gamma[\phi]$}
-	Iniziamo definendo
+	Iniziamo definendo un funzionale che prende la funzione $J$ e restituisce una funzione che in $x$ vale $\Phi(x)$.
 	\[ \Phi[J](x) = \dfrac{\delta W[J]}{\delta J(x)} \]
-	Supponiamo di poter invertire questo funzionale (tipicamente questo è esplicitamente possibile solo in modo perturbativo) e definiamo $\hat{J}$ come il funzionale tale che
-	\[ J(x) = \hat{J}[\Phi](x) \]
+	Supponiamo di poter invertire questo funzionale (tipicamente questo è esplicitamente possibile solo in modo perturbativo) e definiamo $\hat{J}$ come il funzionale $\hat{J}[\Phi]$ tale che
+	\[ J(x) \equiv \hat{J}[\Phi[J]](x) \]
+	Notare che per ogni punto $x$ c'è un funzionale diverso, in particolare indicherò $\hat{J}[\Phi](x)$ anche come $\hat{J}_x[\Phi]$.
+
+	Definiamo ora $\Gamma[\Phi]$ funzionale (a valori in $\R$)
+	\[ \Gamma[\Phi] = W[\hat{J}[\Phi]] - \int \Phi(y)\hat{J}_y[\Phi] \d^4y \]
+	vale allora che
+	\[ \frac{\delta\Gamma}{\delta\Phi(x)} = \int \frac{\delta W}{\delta J(y)} \frac{\delta \hat{J}_y}{\delta \Phi(x)} \d^4y - \int  \frac{\delta\Phi(y)}{\delta\Phi(x)} \hat{J}_y(\Phi) \d^4y - \int \Phi(y) \frac{\delta\hat{J}_y}{\delta\Phi(x)}\d^4y = -J(x) \]
+	Notare l'analogia con l'energia libera di Helmholtz.%TODO: espandere su questo
+	
+	Dimostriamo ora che i diagrammi al tree level generati da $\Gamma$ sono tutti e soli i diagrammi della teoria originale.
+	Costruiamo, reintroducendo temporaneamente $\hbar$,
+	\[ Z_\Gamma[J] = \int \mathcal{D}\phi e^{\frac{i}{\hbar} (\Gamma[\phi] + \int J(y)\phi(y) \d^4y} \]
+	\[ = \int \mathcal{D}\phi e^{\frac{i}{\hbar} (W[\hat{J}[\phi]] + \int (J(y)-\hat{J}_y[\phi])\phi(y) \d^4y)} \]
+	Sappiamo che, mediante la tecnica della fase stazionaria, il termine leading in $Z_\Gamma$ è
+	% OBiezione: \Gamma dipende da \hbar in modo non banale.. da ripensarci
+	\[ Z_\Gamma[J] = e^{\frac{i}{\hbar} (W\left[\hat{J}[\tilde{\phi}]\right] + \int (J(y)-\hat{J}_y[\tilde{\phi}])\tilde{\phi}(y) \d^4y)} \int\mathcal{D}\psi e^{\frac{i}{\hbar}\tilde{S}[\psi, \tilde{\phi}]} \]
+	dove l'integrale sui cammini in $\psi$ è detto contributo delle fluttuazioni quantistiche intorno alla traiettoria classica. Notare che $\tilde{S}[\psi,\tilde{\phi}] = S_0[\psi] +$ termini in cui $\tilde{\phi}$ funge da sorgente esterna. Inoltre $\tilde{\phi}$ risolve l'equazione $\delta(W\left[\hat{J}[\phi]\right] + \int (J(y)-\hat{J}_y[\phi])\phi(y) \d^4y)=0$:
+	\[ \int\frac{\delta W}{\delta J_x}\left[\hat{J}[\tilde{\phi}]\right] \frac{\delta \hat{J}}{\delta \phi} [\tilde{\phi}](x) \d^4x + (J(x)-\hat{J}_x[\tilde{\phi}]) - \int \tilde{\phi}(x)\frac{\delta\hat{J}}{\delta\phi}[\tilde{\phi}](x) \d^4x = 0 \]
+	da cui $\hat{J}_x[\tilde{\phi}] = J(x)$. Sostituendo in $Z_\Gamma$ si ha
+	\[ Z_\Gamma[J] \simeq e^{\frac{i}{\hbar} W[J]} = Z[J] \]
+	da cui $Z_\Gamma$ al tree level genera tutti i diagrammi della teoria completa iniziale. Notiamo che non è che la teoria iniziale improvvisamente è diventata classica: i diagrammi al tree level generati da $\Gamma$ contengono interazioni sia proporzionali a potenze di $\hbar$, sia nonlocali.
+	
 	
 	
 	\section{Rinormalizzazione}
@@ -128,6 +157,10 @@
 	
 	Osserviamo che la divergenza nel valore dell'integrale si traduce nello spazio delle posizioni in una \emph{ambiguità} nella definizione del prodotto di due distribuzioni, cioè non è definito $\Delta(x-y)\Delta(x-y)$.
 	
+	
+	
+	
+		Per proseguire ricordiamo che, ad esempio per induzione, si può dimostrare che in un diagramma connesso con $V$ vertici (interni o esterni, $\sim\frac{1}{\hbar}$), $E$ propagatori ($\sim\hbar$), $L$ loop, il diagramma è proporzionale a $\hbar^{E-V}$ e che $E-V=L-1$. In conclusione il limite classico, dominante per $\hbar\rightarrow 0$, coincide con il tree level in quanto non contiene loops.
 	
 	Abbiamo:
 	\[Z[J] = \bra{0}T(e^{iS_I[\phi]}e^{i\int{\phi(x)J(x)}}\ket{0} = e^{iS_I[-i\frac{\delta}{\delta J}]} Z_0[J] = e^{iS_I[-i\frac{\delta}{\delta J}]} e^{-\frac{i}{2}J\Delta J}\]
